@@ -1,5 +1,5 @@
 import Login from '../components/User/login.vue'
-import SignUp from '../components/User/signup.vue'
+import SignUp from '../components/Usersignup.vue'
 
 export default [
     {

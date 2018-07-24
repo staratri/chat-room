@@ -17,8 +17,7 @@
                         <v-btn color="primary" type = "submit">Sign Up</v-btn>
                     </v-card-actions>
                 </v-form>
-              </v-card-text>
-              
+              </v-card-text> 
             </v-card>
           </v-flex>
         </v-layout>
