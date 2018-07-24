@@ -11,9 +11,26 @@
             <v-icon>  </v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>{{menu.title}}</v-list-tile-title>
+            <v-list-tile-title @click="$router.push(menu.link)">{{menu.title}}</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+        <v-list-tile @click="logOut" v-if="userIsAuthenticated">
+          <v-list-tile-action>
+            <v-icon>  </v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title >Sign Out</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile @click="" v-else>
+          <v-list-tile-action>
+            <v-icon>  </v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title @click="$router.push('/login')">Sign In</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+
       </v-list>
     </v-navigation-drawer>
     <v-toolbar color="indigo" dark fixed app>
@@ -34,10 +51,15 @@
 
 <script>
   export default {
+    
     data: () => ({
       drawer: null
     }),
-    
+    methods : {
+      logOut(){
+        this.$store.dispatch('logOut')
+      }
+    },
     computed : {
       userIsAuthenticated(){
         return this.$store.getters.user !== null && this.$store.getters.user !== undefined
@@ -62,10 +84,6 @@
             {
               title : 'Your Profile',
               link : '/profile'
-            },
-            {
-              title : 'Sign Out',
-              link : '/signout'
             }
           ]
         }

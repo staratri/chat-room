@@ -33,6 +33,10 @@ new Vue({
       databaseURL: "https://chat-room-72c12.firebaseio.com",
       projectId: "chat-room-72c12",
       storageBucket: "chat-room-72c12.appspot.com",
+    }),
+    firebase.auth().onAuthStateChanged((response)=>{
+      if(response)
+        this.$store.dispatch('autoSignIn',response)
     })
   }
 })
