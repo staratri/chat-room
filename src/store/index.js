@@ -6,11 +6,17 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
     state : {
-        user : null
+        user : null,
+        loader: false
     },
     mutations : {
         setUser : (state, payload) =>{
+            state.loader = false
             state.user = payload
+        },
+        unSetUser : (state)=>{
+            state.loader = false
+            state.user = null
         }
     },
     actions : {
@@ -38,6 +44,7 @@ export const store = new Vuex.Store({
                         name : ''
                     }
                     commit('setUser',  newUser)
+                    
                 }
             ).catch(error =>{
                 console.log(error)
@@ -46,9 +53,9 @@ export const store = new Vuex.Store({
         autoSignIn : ({commit}, payload ) =>{
             commit('setUser', { id : payload.uid})
         },
-        logOut : ()=>{
+        logOut : ({commit})=>{
             firebase.auth().signOut().then(()=>{
-                this.$router.push('/login')
+                commit('unSetUser')
             }).catch(error => {
                 console.log(error)
             })

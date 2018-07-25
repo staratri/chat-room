@@ -31,6 +31,7 @@
     },
     methods : {
         onSignIn : function (){
+          this.$store.state.loader = true
             this.$store.dispatch('signInUser', {
                 email : this.email,
                 password : this.password
@@ -48,7 +49,7 @@
     watch :{
         user(value) {
             if(value !==null && value !==undefined){
-                this.$router.push('/')
+                this.$router.push('/chatroom')
             }
         }
     }
